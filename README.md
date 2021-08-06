@@ -1,7 +1,9 @@
+
 # 7_camera_vejledning
 
 ## Slutresultat
-https://user-images.githubusercontent.com/48329669/128468643-1c903d92-e1b6-4fd6-9117-ce369760a0ca.mp4
+https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-a961-e664b45155eb.mp4
+
 
 ## App.js
 1. Start med at oprette et nyt projekt.
