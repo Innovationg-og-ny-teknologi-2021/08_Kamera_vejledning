@@ -5,17 +5,22 @@
 https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-a961-e664b45155eb.mp4
 
 
-## AppStruktur
-1. Opret nu følgende 2 komponenter CameraScreen og ImageScreen med "Hint 1 skabelonen" .
-   1. Husk også at komponentnavn skal være ens med filnavnet
-
 ## App.js
 1. Start med at oprette et nyt projekt.
 2. Installér følgende dependencies med expo install eller npm install;
 npm install react-native-gesture-handler @react-native-community/masked-view react-native-reanimated react-native-safe-area-context react-native-screens @react-navigation/native @react-navigation/bottom-tabs @react-navigation/stack react-native-vector-icons expo-image-picker expo-camera expo-media-library --force
-3. Opret en ny Stack navigator
-4. Gå ned i return og lav en Stack navigator med 2 screen home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
-5. I skulle nu gerne se jeres home komponent
+
+## AppStruktur
+1. Opret nu følgende 2 komponenter CameraScreen og ImageScreen med "Hint 1 skabelonen" .
+    1. Husk også at komponentnavn skal være ens med filnavnet
+
+## App.js
+1. Opret en ny Stack navigator
+2. Gå ned i return og lav en Stack navigator med 2 screen home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
+3. I skulle nu gerne se jeres home komponent
+
+
+
 
 ## CameraScreen.js
 1. Opret en reference kaldt cameraRef. ( `const cameraRef = useRef(); `)
