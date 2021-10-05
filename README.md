@@ -7,7 +7,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 
 ## App.js
 1. Start med at oprette et nyt projekt.
-2. Installér følgende dependencies med expo install eller npm install;
+2. Installér følgende dependencies med expo install
 npm install react-native-gesture-handler @react-native-community/masked-view react-native-reanimated react-native-safe-area-context react-native-screens @react-navigation/native @react-navigation/bottom-tabs @react-navigation/stack react-native-vector-icons expo-image-picker expo-camera expo-media-library --force
 
 ## AppStruktur
