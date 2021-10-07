@@ -33,7 +33,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 
 ## App.js
 1. Opret en ny Stack navigator
-2. Gå ned i return og lav en Stack navigator med 2 screen home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
+2. Gå ned i return og lav en Stack navigator med 2 screen komponenter - home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
 3. I skulle nu gerne se jeres home komponent
 
 ## CameraScreen.js
@@ -42,35 +42,35 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type
 3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null
 4. Lav nu en useEffect funktion ( hints ) og deri en async funktion.
-   1. I denne async funktion lav et object const med status, som sættes lig med `await Camera.requestPermissionAsync()`
-   2. Lav nu et if statement med hvis status ikke er granted, lav en alert som advarer der ikke er kamera
-   3. Dernæst lav et if statement som sætter hvis ikke Platform.OS er web ( !== 'web')
-   4. Lav ligesom Camera persmisson nu en const status object med `` await ImagePicker.requestMediaLibraryPermissionsAsync();`` og lav en allert hvis ikke er granted
-   5. Lav du en set state med setHasPermission hvor du sætter status ligmed granted
-5. Derefter gå ud af useEffect og lav derefter et if statement med hasPermission er lig med null returner et tomt View
-6. Nu skal der laves et return statement hvis hasPermission er false som returnere et View med hhv en tekst og Button inden i
+   1. I denne async funktion lav et object const, status, som sættes lig med `await Camera.requestPermissionAsync()`
+   2. Lav nu et if statement, der tjekker tilstanden af status-variablen. Hvis status !=="granted", laves en alert som beskriver at, der ikke er givet tilladelse til brug af kamera.
+   3. Dernæst laves et if statement som angiver at, Platform.OS!== "web".
+   4. Hvis Platform.OS!== "web", skal der, ligesom med Camera persmisson, oprettes en const status object, der sættes ligmed `` await ImagePicker.requestMediaLibraryPermissionsAsync();``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette.
+   5. Lav du en set state med setHasPermission, hvori status-variablen sættes ligmed granted
+5. Derefter gå ud af useEffect og lav derefter et if statement, der tjekker betingelsen, if (hasPermission === null). Hvis denne betingelse er true, skal der returneres et tomt View
+6. Hvis hasPermission derimod er false, skal der returnerew et View der wrapper hhv et tekst- og Button element. 
    1. Lav en styling til View med flex 1, så den sidder i midten
-   2. I button skal du i din onPress attribut lave en funktion som kalder på ``Linking.openSettings()``
-7. I return-statementet start med at lave en Fragment wrapper
-   1. Deri vil vi øverst have et element kaldt ``<StatusBar>`` som du kan style efter behov ( se referencer )
+   2. I button skal du i onPress attributten lave en funktion, som kalder ``Linking.openSettings()``
+7. I return-statementet oprettes en Fragment wrapper
+   1. Deri vil vi øverst have et element der kaldes ``<StatusBar>`` som du kan style efter behov ( se referencer )
    2. Lav derefter et View element som har stylingen flex:1
-   3. I View elementet lav et ``<Camera> </Camera>`` element hvori attributterne type skal have type staten og ref skal have camera Ref ( se referencer )
+   3. I View elementet laves et ``<Camera> </Camera>`` element, hvori attributterne type skal modtage type-statevariablen og ref skal modtage cameraRef som argument ( se referencer )
    4. Nu burde du se kameraet på din telefon
-8. Nu skal der oprettes TouchableOpacities som kan tage billede, gå til galleriet og vende kameraet. 
-   1. I Camera elementet opret nu et View med en flex styling så den udfylder hele kameraet
-   2. Deri opret tre touchableOpacities med tekst element som repræsentere hhv Flip, Tag billede og galleri
-   3. I Flip TouchableOpacitien lav en funktion som skifter på Camera typen fra front til back, se evt referencer ( setType lav et inline if else statement som kigger på om det er front eller back )
+8. Vi skal nu oprette TouchableOpacities, som kan tage billeder samt gå til galleriet og vende kameraet. 
+   1. I Camera elementet oprettes nu et View-elemt med en flex styling, så den udfylder hele kameraet
+   2. Deri oprettes tre touchableOpacities med tekst elementer, der repræsenterer hhv Flip, Tag billede og galleri
+   3. I Flip laves en funktion som skifter på Camera typen fra front til back, se evt referencer ( setType lav et inline if else statement som kigger på om det er front eller back )
    4. Test nu om du kan skifte imellem for og bag kameraet
-   5. Dernæst gå ned i tag billede touchable opacitie og lav en onPress som kalder på en snap funktion, som du derefter oprettet
-9. I snap funktionen skal du sørge for at funktionen er asynkron
-   1. Først skal du tjekke om cameraRef.current er aktiv ``!cameraRef.current`` og hvis true returner ingenting
+   5. Dernæst gå ned i tag billede touchable opacitie og lav en onPress, som kalder på en snap funktion. Denne funktion skal du nu oprette
+9. I snap funktionen er asynkron, idet denne indeholder et asynkront kald. 
+   1. Først skal du tjekke om cameraRef.current er aktiv ``!cameraRef.current`` og hvis true returnerer ingenting
    2. Dernæst sæt loading til true
-   3. Lav nu et kald `` await cameraRef.current.takePictureAsync()`` som sættes lig med const result
-   4. Hvis du gerne vil have at når du tager billeder at den gemmer til din telefon kan du tilføje dette ``await MediaLibrary.saveToLibraryAsync(result.uri)``
+   3. Lav nu et kald `` await cameraRef.current.takePictureAsync()`` som sættes ligmed const result
+   4. Såfremt du ønsker at de bileder, som du tager, skal gemmes på din enhed, kan du tilføje følgende; ``await MediaLibrary.saveToLibraryAsync(result.uri)``
    5. Dernæst skal du skal du skrive følgende for at tilføje til ImageArr ``setImagesArr((imagesArr) => [result].concat(imagesArr));``
-      1. Det vi gør her er at vi laver en funktion som tager result og ligger det først i det eksisterende array vi har for billeder
-   6. Herunder sæt nu loading til false
-   7. Gå ned til knappen og lav et if statement for tekst elementet med loading, hvor true siger loading og false siger "tag billede "
+      1. Det vi gør her er at vi laver en funktion som tager result og ligger det først i det eksisterende array, der har alle billeder
+   6. Herunder sættes nu loading til false
+   7. Gå ned til knappen og lav et if statement for tekst elementet med loading, hvor true skal medfører at loading eksekveres, mens false angiver, "tag billede "
    8. Test nu om dit kamera tager billeder ved at lave en console.log på result eller kig i dit galleri om du har taget et billede
 10. Ved galleri knappen kald nu på en funktion kaldt pickImage og opret funktionen
     1. Funktionen skal være asynkron og tage udgangspunkt i referencen image picker i bunden
