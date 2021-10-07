@@ -3,27 +3,42 @@
 
 ## Slutresultat
 https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-a961-e664b45155eb.mp4
-
+#### Denne opgave kan ikke køres på simulator på grund af dårlig understøttelse !
 
 ## App.js
 1. Start med at oprette et nyt projekt.
-2. Installér følgende dependencies med expo install eller npm install;
-npm install react-native-gesture-handler @react-native-community/masked-view react-native-reanimated react-native-safe-area-context react-native-screens @react-navigation/native @react-navigation/bottom-tabs @react-navigation/stack react-native-vector-icons expo-image-picker expo-camera expo-media-library --force
+2. Installér følgende dependencies med ved at ligge dette ind i dine dependencies;
+`  "dependencies": {
+   "@react-native-community/masked-view": "^0.1.11",
+   "@react-navigation/bottom-tabs": "^6.0.0",
+   "react-native-gesture-handler": "^1.10.3",
+   "@react-navigation/native": "^6.0.0",
+   "@react-navigation/stack": "^6.0.0",
+   "react-native-vector-icons": "^8.1.0",
+   "expo-image-picker": "~10.2.2",
+   "expo-camera": "^11.2.2",
+   "expo-media-library": "^12.1.2",
+   "expo": "~42.0.1",
+   "expo-status-bar": "~1.0.4",
+   "react": "16.13.1",
+   "react-dom": "16.13.1",
+   "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+   "react-native-web": "~0.13.12"
+   },`
+3. Opdatering: 7 okt: Hvis du installerer pakkerne med expo install, så vil der være en konflikt med kameraet aktive state, så brug disse dependecies til jeres eget projekt.
 
 ## AppStruktur
 1. Opret nu følgende 2 komponenter CameraScreen og ImageScreen med "Hint 1 skabelonen" .
-    1. Husk også at komponentnavn skal være ens med filnavnet
+    1. `Husk også at komponentnavn skal være ens med filnavnet`
 
 ## App.js
 1. Opret en ny Stack navigator
 2. Gå ned i return og lav en Stack navigator med 2 screen home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
 3. I skulle nu gerne se jeres home komponent
 
-
-
-
 ## CameraScreen.js
-1. Opret en reference kaldt cameraRef. ( `const cameraRef = useRef(); `)
+Øvelse tager udgangspunkt i https://docs.expo.dev/versions/latest/sdk/camera/ 
+1. Opret en reference kaldt cameraRef. `const cameraRef = useRef(); `
 2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type
 3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null
 4. Lav nu en useEffect funktion ( hints ) og deri en async funktion.
