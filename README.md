@@ -8,23 +8,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 ## App.js
 1. Start med at oprette et nyt projekt.
 2. Installér følgende dependencies med ved at ligge dette ind i dine dependencies;
-`  "dependencies": {
-   "@react-native-community/masked-view": "^0.1.11",
-   "@react-navigation/bottom-tabs": "^6.0.0",
-   "react-native-gesture-handler": "^1.10.3",
-   "@react-navigation/native": "^6.0.0",
-   "@react-navigation/stack": "^6.0.0",
-   "react-native-vector-icons": "^8.1.0",
-   "expo-image-picker": "~10.2.2",
-   "expo-camera": "^11.2.2",
-   "expo-media-library": "^12.1.2",
-   "expo": "~42.0.1",
-   "expo-status-bar": "~1.0.4",
-   "react": "16.13.1",
-   "react-dom": "16.13.1",
-   "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-   "react-native-web": "~0.13.12"
-   },`
+`npx expo install @react-native-masked-view/masked-view @react-navigation/bottom-tabs @react-navigation/native @react-navigation/stack expo-camera expo-image-picker react-native-gesture-handler react-native-safe-area-context react-native-screens`
 3. Opdatering: 7 okt: Hvis du installerer pakkerne med expo install, så vil der være en konflikt med kameraet aktive state, så brug disse dependecies til jeres eget projekt.
 
 ## AppStruktur
