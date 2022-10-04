@@ -7,13 +7,13 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 
 ## App.js
 1. Start med at oprette et nyt projekt.
-2. Installér følgende dependencies med ved at ligge dette ind i dine dependencies;
-`npx expo install @react-native-masked-view/masked-view @react-navigation/bottom-tabs @react-navigation/native @react-navigation/stack expo-camera expo-image-picker react-native-gesture-handler react-native-safe-area-context react-native-screens`
-3. Opdatering: 7 okt: Hvis du installerer pakkerne med expo install, så vil der være en konflikt med kameraet aktive state, så brug disse dependecies til jeres eget projekt.
+2. Installer følgende dependencies
+</br>`npx expo install @react-native-masked-view/masked-view @react-navigation/bottom-tabs @react-navigation/native @react-navigation/stack expo-camera expo-image-picker react-native-gesture-handler react-native-safe-area-context react-native-screens`
 
 ## AppStruktur
 1. Opret nu følgende 2 komponenter CameraScreen og ImageScreen med "Hint 1 skabelonen" .
-    1. `Husk også at komponentnavn skal være ens med filnavnet`
+    1. Husk også at komponentnavn skal være ens med filnavnet
+    2. Og at react komponentnavne skal starte med Stort ligesom navne
 
 ## App.js
 1. Opret en ny Stack navigator
@@ -22,30 +22,30 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 
 ## CameraScreen.js
 Øvelse tager udgangspunkt i https://docs.expo.dev/versions/latest/sdk/camera/ 
-1. Opret en reference kaldt cameraRef. `const cameraRef = useRef(); `
-2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type
-3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null
+1. Opret en reference kaldt cameraRef. `const cameraRef = useRef(); ` </br> </br>
+2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type </br> </br>
+3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null </br> </br>
 4. Lav nu en useEffect funktion ( hints ) og deri en async funktion.
-   1. I denne async funktion lav et object const, status, som sættes lig med `await Camera.requestPermissionAsync()`
+   1. I denne async funktion lav et object const, `{ status }`, som sættes lig med `await Camera.requestCameraPermissionAsync()`
    2. Lav nu et if statement, der tjekker tilstanden af status-variablen. Hvis status !=="granted", laves en alert som beskriver at, der ikke er givet tilladelse til brug af kamera.
    3. Dernæst laves et if statement som angiver at, Platform.OS!== "web".
-   4. Hvis Platform.OS!== "web", skal der, ligesom med Camera persmisson, oprettes en const status object, der sættes ligmed `` await ImagePicker.requestMediaLibraryPermissionsAsync();``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette.
-   5. Lav du en set state med setHasPermission, hvori status-variablen sættes ligmed granted
-5. Derefter gå ud af useEffect og lav derefter et if statement, der tjekker betingelsen, if (hasPermission === null). Hvis denne betingelse er true, skal der returneres et tomt View
-6. Hvis hasPermission derimod er false, skal der returnerew et View der wrapper hhv et tekst- og Button element. 
+   4. Hvis Platform.OS!== "web", skal der, ligesom med Camera permission, oprettes en const `{ status }` object, der sættes lig med `` await ImagePicker.requestMediaLibraryPermissionsAsync();``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette.
+   5. Lav du en set state med setHasPermission, hvori status-variablen sættes lig med granted </br> </br>
+5. Derefter gå ud af useEffect og lav derefter et if statement, der tjekker betingelsen, if (hasPermission === null). Hvis denne betingelse er true, skal der returneres et tomt View </br> </br>
+6. Hvis hasPermission derimod er false, skal der returner et View der wrapper hhv et tekst- og Button element.
    1. Lav en styling til View med flex 1, så den sidder i midten
-   2. I button skal du i onPress attributten lave en funktion, som kalder ``Linking.openSettings()``
+   2. I button skal du i onPress attributten lave en funktion, som kalder ``Linking.openSettings()`` </br> </br>
 7. I return-statementet oprettes en Fragment wrapper
    1. Deri vil vi øverst have et element der kaldes ``<StatusBar>`` som du kan style efter behov ( se referencer )
    2. Lav derefter et View element som har stylingen flex:1
    3. I View elementet laves et ``<Camera> </Camera>`` element, hvori attributterne type skal modtage type-statevariablen og ref skal modtage cameraRef som argument ( se referencer )
-   4. Nu burde du se kameraet på din telefon
+   4. Nu burde du se kameraet på din telefon </br> </br>
 8. Vi skal nu oprette TouchableOpacities, som kan tage billeder samt gå til galleriet og vende kameraet. 
-   1. I Camera elementet oprettes nu et View-elemt med en flex styling, så den udfylder hele kameraet
+   1. I Camera elementet oprettes nu et View-element med en flex styling, så den udfylder hele kameraet
    2. Deri oprettes tre touchableOpacities med tekst elementer, der repræsenterer hhv Flip, Tag billede og galleri
    3. I Flip laves en funktion som skifter på Camera typen fra front til back, se evt referencer ( setType lav et inline if else statement som kigger på om det er front eller back )
    4. Test nu om du kan skifte imellem for og bag kameraet
-   5. Dernæst gå ned i tag billede touchable opacitie og lav en onPress, som kalder på en snap funktion. Denne funktion skal du nu oprette
+   5. Dernæst gå ned i tag billede TouchableOpacity og lav en onPress, som kalder på en snap funktion. Denne funktion skal du nu oprette </br> </br>
 9. I snap funktionen er asynkron, idet denne indeholder et asynkront kald. 
    1. Først skal du tjekke om cameraRef.current er aktiv ``!cameraRef.current`` og hvis true returnerer ingenting
    2. Dernæst sæt loading til true
@@ -55,26 +55,29 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
       1. Det vi gør her er at vi laver en funktion som tager result og ligger det først i det eksisterende array, der har alle billeder
    6. Herunder sættes nu loading til false
    7. Gå ned til knappen og lav et if statement for tekst elementet med loading, hvor true skal medfører at loading eksekveres, mens false angiver, "tag billede "
-   8. Test nu om dit kamera tager billeder ved at lave en console.log på result eller kig i dit galleri om du har taget et billede
+   8. Test nu om dit kamera tager billeder ved at lave en console.log på result eller kig i dit galleri om du har taget et billede </br> </br>
 10. Ved galleri knappen kald nu på en funktion kaldt pickImage og opret funktionen
-    1. Funktionen skal være asynkron og tage udgangspunkt i referencen image picker i bunden
-11. Husk styling til alle dine knapper evt se video øverst
-12. Nu skal galleriet i image arrayet vises
+    1. Funktionen skal være asynkron og tage udgangspunkt i referencen image picker i bunden </br> </br>
+11. Husk styling til alle dine knapper evt se video øverst </br> </br>
+12. Nu skal galleriet i image arrayed vises
     1. Opret en funktion kaldt CameraGallery som har et return
     2. I return opret nu en wrapper med View som har flex: 0.4 som styling og alignment center, padding og width på 100%
     3. I Viewet lav først et tekst element som siger antallet af billeder taget. `` imagesArr.length``
     4. Opret nu et ScrollView element som har horizontal attribute til true
-    5. Dernæst lav et map funktion af imagesArr som loper igennem de billeder som er taget med TouchableOpacity som wrapper og et billedet i midten ( se evt hint)
+    5. Dernæst lav et map funktion af imagesArr som looper igennem de billeder som er taget med TouchableOpacity som wrapper og et billedet i midten ( se evt hint)
     6. Opret også et if else som tjekker om images arr er større en 0
     7. Nu skal du kalde ``<CameraGallery/>`` i return funktionen.
     8. Tjek nu når du tager billeder at dine billeder bliver vist
-    9. Hvis du har probler console.log all the way ;) 
+    9. Hvis du har problem console.log all the way ;) 
 
 ## ImageScreen.js
 1. Først opret state for image
 2. lav en useEffect med en funktion som sætter route.params.image i setImage og husk at lave en return funktion for at nulstille image
-3. i return funktionen lav et ``Image`` element som tage image med uri'en og null hvis der ikke er et billede. Og width + height skal bestemmes af enhedens height og width ( Dimensions.get('window'))
-4. Se nu om du kan trykke på de taget billeder om de skifter view til ImagesScreen
+3. i return funktionen lav et ``Image`` element som tage image med uri'en og null hvis der ikke er et billede.
+   1. `source={{ uri: image ?  image : null }}`
+4. Og width + height skal bestemmes af enhedens height og width ( Dimensions.get('window'))
+   1. `width={Dimensions.get('window').width}`
+5. Se nu om du kan trykke på de taget billeder om de skifter view til ImagesScreen
 
 
 ## Ekstra opgave
@@ -115,6 +118,39 @@ useEffect(() => {
 
 ```
 
+### hint 4 - pickImage
+```
+const pickImage = async () => {
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setImagesArr((imagesArr) => [result].concat(imagesArr));
+        }
+    };
+```
+
+### hint 5 - snap
+```
+const snap = async () => {
+        if (!cameraRef.current) {
+            return;
+        }
+        setLoading(true);
+        const result = await cameraRef.current.takePictureAsync();
+
+        /*Udkommenter nedenstående for at gemme billedet taget til telefonen*/
+        /*await MediaLibrary.saveToLibraryAsync(result.uri)*/
+
+        /*Vi ligger vores taget billedet først ind i arrayet*/
+        setImagesArr((imagesArr) => [result].concat(imagesArr));
+        setLoading(false);
+    };
+```
 
 ## Referencer
 https://docs.expo.dev/versions/latest/sdk/camera/
