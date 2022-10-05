@@ -26,7 +26,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type </br> </br>
 3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null </br> </br>
 4. Lav nu en useEffect funktion ( hints ) og deri en async funktion.
-   1. I denne async funktion lav et object const, `{ status }`, som sættes lig med `await Camera.requestCameraPermissionAsync()`
+   1. I denne async funktion lav et object const, `{ status }`, som sættes lig med `await Camera.requestCameraPermissionsAsync()`
    2. Lav nu et if statement, der tjekker tilstanden af status-variablen. Hvis status !=="granted", laves en alert som beskriver at, der ikke er givet tilladelse til brug af kamera.
    3. Dernæst laves et if statement som angiver at, Platform.OS!== "web".
    4. Hvis Platform.OS!== "web", skal der, ligesom med Camera permission, oprettes en const `{ status }` object, der sættes lig med `` await ImagePicker.requestMediaLibraryPermissionsAsync();``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette.
