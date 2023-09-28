@@ -6,7 +6,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 #### Denne opgave kan ikke køres på simulator på grund af dårlig understøttelse !
 
 ## App.js
-1. Start med at oprette et nyt projekt.
+1. Start med at oprette et nyt projekt. `` npx create-expo-app <jeres-app-navn> ``
 2. Installer følgende dependencies
 </br>`npx expo install @react-native-masked-view/masked-view @react-navigation/bottom-tabs @react-navigation/native @react-navigation/stack expo-camera expo-image-picker react-native-gesture-handler react-native-safe-area-context react-native-screens`
 
@@ -26,16 +26,22 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 2. opret nu 4 states, kaldt hasPermission, imageArr,loading og type </br> </br>
 3. Type skal have en initial state ``Camera.Constants.Type.back``, og imageArr skal være et tomt array og permission null </br> </br>
 4. Lav nu en useEffect funktion ( hints ) og deri en async funktion.
-   1. I denne async funktion lav et object const, `{ status }`, som sættes lig med `await Camera.requestCameraPermissionsAsync()`
+   1. I denne async funktion lav et object const, `{ status }`, som sættes lig med `await Camera.requestCameraPermissionsAsync();`
    2. Lav nu et if statement, der tjekker tilstanden af status-variablen. Hvis status !=="granted", laves en alert som beskriver at, der ikke er givet tilladelse til brug af kamera.
    3. Dernæst laves et if statement som angiver at, Platform.OS!== "web".
-   4. Hvis Platform.OS!== "web", skal der, ligesom med Camera permission, oprettes en const `{ status }` object, der sættes lig med `` await ImagePicker.requestMediaLibraryPermissionsAsync();``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette.
-   5. Lav du en set state med setHasPermission, hvori status-variablen sættes lig med granted </br> </br>
-5. Derefter gå ud af useEffect og lav derefter et if statement, der tjekker betingelsen, if (hasPermission === null). Hvis denne betingelse er true, skal der returneres et tomt View </br> </br>
+   4. Hvis Platform.OS!== "web", skal der, ligesom med Camera permission, oprettes en const `{ status }` object, der sættes lig med `` await ImagePicker.requestMediaLibraryPermissionsAsync(); ``. Hvis status !=="granted", skal der igen laves en alert, der beskriver dette. Kunne f.eks. være ` alert('Sorry, we need camera roll permissions to make this work!'); `
+   5. Lav du en set state med setHasPermission, hvori status-variablen sættes lig med granted ` setHasPermission(status === 'granted'); ` </br> </br>
+5. Derefter gå ud af useEffect og lav et if statement, der tjekker betingelsen, ` if (hasPermission === null) `. Hvis denne betingelse er true, skal der returneres et tomt View ` return <View /> ` </br> </br>
 6. Hvis hasPermission derimod er false, skal der returner et View der wrapper hhv et tekst- og Button element.
    1. Lav en styling til View med flex 1, så den sidder i midten
-   2. I button skal du i onPress attributten lave en funktion, som kalder ``Linking.openSettings()`` </br> </br>
-7. I return-statementet oprettes en Fragment wrapper
+   2. I button skal du i onPress attributten lave en funktion, som kalder ``Linking.openSettings()`` </br>
+           ```return(
+            <View style={styles.gallery}>
+                <Text>No access to camera</Text>
+                <Button title={"Change settings"} onPress={() => Linking.openSettings()}/>
+            </View> ```
+       </br>
+7. I return-statementet oprettes en Fragment wrapper. Læs doku her: https://react.dev/reference/react/Fragment#fragment 
    1. Deri vil vi øverst have et element der kaldes ``<StatusBar>`` som du kan style efter behov ( se referencer )
    2. Lav derefter et View element som har stylingen flex:1
    3. I View elementet laves et ``<Camera> </Camera>`` element, hvori attributterne type skal modtage type-statevariablen og ref skal modtage cameraRef som argument ( se referencer )
@@ -150,6 +156,53 @@ const snap = async () => {
         setImagesArr((imagesArr) => [result].concat(imagesArr));
         setLoading(false);
     };
+```
+
+### hint 6 - Camera Return
+```
+ return (
+        <Fragment>
+            <StatusBar StatusBarStyle="dark-content" style={{fontcolor:"white"}} backgroundColor={'rgba(255,255,255,0.4)'} />
+            <View style={styles.container}>
+                <Camera style={styles.camera} type={type} ref={cameraRef}>
+                    <View style={{flexDirection:"column",alignContent:"center",flex:1,padding:20}}>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => {
+                                    setType(
+                                        type === Camera.Constants.Type.back
+                                            ? Camera.Constants.Type.front
+                                            : Camera.Constants.Type.back
+                                    );
+                                }}>
+                                <Text style={styles.text}> Flip </Text>
+                            </TouchableOpacity>
+
+                            {/*Gir sig selv*/}
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={snap}
+                            >
+                                <Text style={styles.text}>
+                                    {loading ? "Loading..." :"Tag billede"}
+                                </Text>
+                            </TouchableOpacity>
+
+                            {/*Skift retning på kamera*/}
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={pickImage}
+                            >
+                                <Text style={styles.text}> Galleri </Text>
+                            </TouchableOpacity>
+                        </View>
+                        <CameraGallery/>
+                    </View>
+                </Camera>
+            </View>
+        </Fragment>
+    );
 ```
 
 ## Referencer
