@@ -17,7 +17,7 @@ https://user-images.githubusercontent.com/48329669/128479609-ad28c1e8-c726-4073-
 
 ## App.js
 1. Opret en ny Stack navigator
-2. Gå ned i return og lav en Stack navigator med 2 screen komponenter - home og image. I kan evt fjerne header på home screen med headerShown false i options attributten
+2. Gå ned i return og lav en Stack navigator med 2 screen komponenter - camera og image. I kan evt fjerne header på camera screen med headerShown false i options attributten ` <Stack.Screen name={'home'} component={CameraScreen} options={{headerShown: false}} /> `
 3. I skulle nu gerne se jeres home komponent
 
 ## CameraScreen.js
