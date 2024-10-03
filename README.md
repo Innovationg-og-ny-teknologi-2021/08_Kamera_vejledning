@@ -1,4 +1,4 @@
-# Arbejde med Kamera i React Native
+# Arbejde med Kamera i React Native ᕦ(⌐■ ͜ʖ■)ᕥ 📷
 
 I denne guide skal vi arbejde med kameraet i en React Native-app. Vi bruger Expo's indbyggede `expo-camera` og `expo-image-picker` til at få adgang til kamera og billeder.
 
@@ -477,4 +477,4 @@ return(
 )
 ```
 
-Din camera app skulle nu gerne være done! 
+Din camera app skulle nu gerne være done!  ヾ(⌐■_■)ノ
